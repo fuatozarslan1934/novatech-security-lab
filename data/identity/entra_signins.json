@@ -1,0 +1,44 @@
+[
+  {
+    "timestamp": "2026-09-26T02:13:58Z",
+    "user": "netadmin@novatech.example",
+    "source_ip": "198.51.100.77",
+    "result": "Failure",
+    "application": "Azure Portal"
+  },
+  {
+    "timestamp": "2026-09-26T02:14:11Z",
+    "user": "netadmin@novatech.example",
+    "source_ip": "198.51.100.77",
+    "result": "Failure",
+    "application": "Azure Portal"
+  },
+  {
+    "timestamp": "2026-09-26T02:15:02Z",
+    "user": "netadmin@novatech.example",
+    "source_ip": "198.51.100.77",
+    "result": "Failure",
+    "application": "Azure Portal"
+  },
+  {
+    "timestamp": "2026-09-26T02:16:01Z",
+    "user": "netadmin@novatech.example",
+    "source_ip": "198.51.100.77",
+    "result": "Success",
+    "application": "Azure Portal"
+  },
+  {
+    "timestamp": "2026-09-25T21:10:41Z",
+    "user": "cloudadmin@novatech.example",
+    "source_ip": "192.0.2.44",
+    "result": "Success",
+    "application": "Azure Portal"
+  },
+  {
+    "timestamp": "2026-09-25T18:20:00Z",
+    "user": "developer1@novatech.example",
+    "source_ip": "192.0.2.80",
+    "result": "Success",
+    "application": "Azure CLI"
+  }
+]

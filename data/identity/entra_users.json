@@ -1,0 +1,52 @@
+{
+  "users": [
+    {
+      "username": "jsmith@novatech.example",
+      "department": "Marketing",
+      "enabled": true,
+      "last_signin": "2026-09-25T16:30:00Z"
+    },
+    {
+      "username": "netadmin@novatech.example",
+      "department": "IT",
+      "enabled": true,
+      "last_signin": "2026-09-26T02:16:07Z"
+    },
+    {
+      "username": "cloudadmin@novatech.example",
+      "department": "Cloud",
+      "enabled": true,
+      "last_signin": "2026-09-25T21:11:00Z"
+    },
+    {
+      "username": "admin.old@novatech.example",
+      "department": "IT",
+      "enabled": true,
+      "last_signin": "2026-01-04T09:12:00Z"
+    },
+    {
+      "username": "developer1@novatech.example",
+      "department": "Engineering",
+      "enabled": true,
+      "last_signin": "2026-09-25T18:20:00Z"
+    },
+    {
+      "username": "security1@novatech.example",
+      "department": "Security",
+      "enabled": true,
+      "last_signin": "2026-09-26T01:00:00Z"
+    },
+    {
+      "username": "svc-backup@novatech.example",
+      "department": "Service Accounts",
+      "enabled": true,
+      "last_signin": "2026-09-26T02:22:00Z"
+    },
+    {
+      "username": "contractor1@novatech.example",
+      "department": "Contractor",
+      "enabled": false,
+      "last_signin": "2026-06-01T11:15:00Z"
+    }
+  ]
+}

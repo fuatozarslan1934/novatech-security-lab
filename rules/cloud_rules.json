@@ -1,0 +1,64 @@
+{
+  "rules": [
+    {
+      "id": "AZ-NET-001",
+      "title": "SSH exposed to Internet",
+      "severity": "HIGH",
+      "resource_type": "nsg",
+      "port": 22,
+      "source": "0.0.0.0/0"
+    },
+    {
+      "id": "AZ-NET-002",
+      "title": "RDP exposed to Internet",
+      "severity": "HIGH",
+      "resource_type": "nsg",
+      "port": 3389,
+      "source": "0.0.0.0/0"
+    },
+    {
+      "id": "AZ-STG-001",
+      "title": "Storage allows public blob access",
+      "severity": "HIGH",
+      "resource_type": "storage_account",
+      "field": "allow_blob_public_access",
+      "value": true
+    },
+    {
+      "id": "AZ-STG-002",
+      "title": "Storage minimum TLS below 1.2",
+      "severity": "MEDIUM",
+      "resource_type": "storage_account",
+      "field": "minimum_tls",
+      "disallowed": [
+        "TLS1_0",
+        "TLS1_1"
+      ]
+    },
+    {
+      "id": "AZ-SQL-001",
+      "title": "SQL auditing disabled",
+      "severity": "MEDIUM",
+      "resource_type": "sql_database",
+      "field": "auditing_enabled",
+      "value": false
+    },
+    {
+      "id": "AZ-KV-001",
+      "title": "Key Vault public network access enabled",
+      "severity": "MEDIUM",
+      "resource_type": "key_vault",
+      "field": "public_network_access",
+      "value": true
+    } ,
+        {
+      "id": "AZ-KV-001",
+      "title": "Key Vault public network access enabled",
+      "severity": "MEDIUM",
+      "resource_type": "key_vault",
+      "field": "public_network_access",
+      "value": true
+    }
+  ]
+}
+  

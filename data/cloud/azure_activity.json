@@ -1,0 +1,34 @@
+[
+  {
+    "timestamp": "2026-09-26T02:18:10Z",
+    "caller": "netadmin@novatech.example",
+    "source_ip": "198.51.100.77",
+    "operation": "Microsoft.Network/networkSecurityGroups/securityRules/write",
+    "resource": "nsg-web/Allow-Temp-Admin",
+    "status": "Succeeded"
+  },
+  {
+    "timestamp": "2026-09-26T02:19:42Z",
+    "caller": "netadmin@novatech.example",
+    "source_ip": "198.51.100.77",
+    "operation": "Microsoft.Compute/virtualMachines/read",
+    "resource": "web-prod-01",
+    "status": "Succeeded"
+  },
+  {
+    "timestamp": "2026-09-26T02:22:11Z",
+    "caller": "svc-backup@novatech.example",
+    "source_ip": "10.20.5.15",
+    "operation": "Microsoft.Storage/storageAccounts/listKeys/action",
+    "resource": "backup-storage",
+    "status": "Succeeded"
+  },
+  {
+    "timestamp": "2026-09-25T21:11:03Z",
+    "caller": "cloudadmin@novatech.example",
+    "source_ip": "192.0.2.44",
+    "operation": "Microsoft.Authorization/roleAssignments/write",
+    "resource": "subscription",
+    "status": "Succeeded"
+  }
+]

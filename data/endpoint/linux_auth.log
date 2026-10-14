@@ -1,0 +1,7 @@
+Sep 26 02:14:40 web-prod-01 sshd[2241]: Failed password for root from 198.51.100.77 port 44121 ssh2
+Sep 26 02:14:46 web-prod-01 sshd[2247]: Failed password for root from 198.51.100.77 port 44127 ssh2
+Sep 26 02:14:51 web-prod-01 sshd[2250]: Failed password for admin from 198.51.100.77 port 44135 ssh2
+Sep 26 02:15:10 web-prod-01 sshd[2265]: Failed password for devops from 198.51.100.77 port 44150 ssh2
+Sep 26 02:19:08 web-prod-01 sshd[2299]: Accepted password for devops from 198.51.100.77 port 44189 ssh2
+Sep 26 02:20:02 web-prod-01 sudo: devops : TTY=pts/0 ; PWD=/home/devops ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow
+Sep 26 09:14:02 app-prod-01 sshd[811]: Accepted publickey for deploy from 10.20.10.12 port 52000 ssh2

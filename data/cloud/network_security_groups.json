@@ -1,0 +1,54 @@
+{
+  "network_security_groups": [
+    {
+      "name": "nsg-web",
+      "rules": [
+        {
+          "name": "Allow-SSH",
+          "source": "0.0.0.0/0",
+          "destination_port": 22,
+          "protocol": "TCP",
+          "action": "Allow",
+          "priority": 100
+        },
+        {
+          "name": "Allow-HTTPS",
+          "source": "0.0.0.0/0",
+          "destination_port": 443,
+          "protocol": "TCP",
+          "action": "Allow",
+          "priority": 110
+        },
+        {
+          "name": "Deny-All",
+          "source": "*",
+          "destination_port": "*",
+          "protocol": "*",
+          "action": "Deny",
+          "priority": 4096
+        }
+      ]
+    },
+    {
+      "name": "nsg-app",
+      "rules": [
+        {
+          "name": "Allow-App-From-Web",
+          "source": "10.20.1.0/24",
+          "destination_port": 8080,
+          "protocol": "TCP",
+          "action": "Allow",
+          "priority": 100
+        },
+        {
+          "name": "Deny-All",
+          "source": "*",
+          "destination_port": "*",
+          "protocol": "*",
+          "action": "Deny",
+          "priority": 4096
+        }
+      ]
+    }
+  ]
+}

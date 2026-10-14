@@ -1,0 +1,100 @@
+{
+  "subscription": "NovaTech-Production",
+  "resources": [
+    {
+      "name": "web-prod-01",
+      "type": "virtual_machine",
+      "private_ip": "10.20.1.10",
+      "public_ip": "203.0.113.25",
+      "subnet": "web-subnet",
+      "managed_identity": false,
+      "os": "Ubuntu 22.04",
+      "password_authentication": true,
+      "disk_encryption": "platform"
+    },
+    {
+      "name": "app-prod-01",
+      "type": "virtual_machine",
+      "private_ip": "10.20.2.10",
+      "public_ip": null,
+      "subnet": "app-subnet",
+      "managed_identity": true,
+      "os": "Ubuntu 22.04",
+      "password_authentication": false,
+      "disk_encryption": "platform"
+    },
+    {
+      "name": "customer-storage",
+      "type": "storage_account",
+      "public_network_access": true,
+      "allow_blob_public_access": true,
+      "minimum_tls": "TLS1_0",
+      "network_default_action": "Allow"
+    },
+    {
+      "name": "backup-storage",
+      "type": "storage_account",
+      "public_network_access": false,
+      "allow_blob_public_access": false,
+      "minimum_tls": "TLS1_2",
+      "network_default_action": "Deny"
+    },
+    {
+      "name": "customer-db",
+      "type": "sql_database",
+      "server": "sql-prod-01",
+      "public_network_access": true,
+      "auditing_enabled": false,
+      "firewall_rules": [
+        {
+          "start_ip": "0.0.0.0",
+          "end_ip": "255.255.255.255"
+        }
+      ]
+    },
+    {
+      "name": "prod-keyvault",
+      "type": "key_vault",
+      "public_network_access": true,
+      "rbac_enabled": true,
+      "secrets": [
+        {
+          "name": "database-password",
+          "expires": "2026-10-05"
+        },
+        {
+          "name": "legacy-api-key",
+          "expires": null
+        },
+        {
+          "name": "application-secret",
+          "expires": "2027-03-01"
+        }
+      ]
+    },
+    {
+      "name": "vnet-prod",
+      "type": "virtual_network",
+      "address_space": "10.20.0.0/16",
+      "subnets": [
+        "web-subnet",
+        "app-subnet",
+        "data-subnet"
+      ]
+    },
+    {
+      "name": "nsg-web",
+      "type": "network_security_group"
+    },
+    {
+      "name": "nsg-app",
+      "type": "network_security_group"
+    },
+    {
+      "name": "portal-app",
+      "type": "app_service",
+      "managed_identity": true,
+      "https_only": true
+    }
+  ]
+}

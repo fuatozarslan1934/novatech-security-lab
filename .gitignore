@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+
+# Generated security reports
+reports/*.json
+reports/*.csv
+reports/*.html

@@ -1,0 +1,32 @@
+{
+  "rules": [
+    {
+      "id": "ID-RBAC-001",
+      "title": "Subscription Owner assignment",
+      "severity": "HIGH",
+      "role": "Owner",
+      "scope": "subscription"
+    },
+    {
+      "id": "ID-RBAC-002",
+      "title": "Contributor assignment requires review",
+      "severity": "MEDIUM",
+      "role": "Contributor"
+    },
+    {
+      "id": "ID-AUTH-001",
+      "title": "Multiple failed logins followed by success",
+      "severity": "HIGH",
+      "failed_threshold": 3,
+      "window_minutes": 10
+    } ,
+
+  {
+    "id": "ID-STALE-001",
+    "title": "Stale privileged account",
+    "severity": "HIGH",
+    "inactive_days_threshold": 90
+    }
+  ]
+}
+  

@@ -1,0 +1,34 @@
+{
+  "assignments": [
+    {
+      "identity": "cloudadmin@novatech.example",
+      "role": "Owner",
+      "scope": "subscription"
+    },
+    {
+      "identity": "admin.old@novatech.example",
+      "role": "Owner",
+      "scope": "subscription"
+    },
+    {
+      "identity": "netadmin@novatech.example",
+      "role": "Contributor",
+      "scope": "rg-network-prod"
+    },
+    {
+      "identity": "security1@novatech.example",
+      "role": "Security Reader",
+      "scope": "subscription"
+    },
+    {
+      "identity": "developer1@novatech.example",
+      "role": "Reader",
+      "scope": "rg-app-prod"
+    },
+    {
+      "identity": "svc-backup@novatech.example",
+      "role": "Storage Blob Data Contributor",
+      "scope": "backup-storage"
+    }
+  ]
+}

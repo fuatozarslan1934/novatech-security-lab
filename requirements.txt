@@ -1,0 +1,7 @@
+pandas
+rich
+python-dotenv
+pydantic
+jinja2
+openai
+anthropic

@@ -1,0 +1,28 @@
+{
+  "incidents": [
+    {
+      "id": "INC-001",
+      "title": "Possible SSH brute-force and compromise",
+      "difficulty": "Easy",
+      "status": "Open"
+    },
+    {
+      "id": "INC-002",
+      "title": "Suspicious Cisco administrator activity",
+      "difficulty": "Medium",
+      "status": "Open"
+    },
+    {
+      "id": "INC-003",
+      "title": "Unexpected cloud privilege and configuration activity",
+      "difficulty": "Medium",
+      "status": "Open"
+    },
+    {
+      "id": "INC-004",
+      "title": "Potential multi-system compromise",
+      "difficulty": "Hard",
+      "status": "Open"
+    }
+  ]
+}

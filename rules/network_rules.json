@@ -1,0 +1,64 @@
+{
+  "rules": [
+    {
+      "id": "NET-AUTH-001",
+      "title": "Multiple failed network logins",
+      "severity": "MEDIUM",
+      "failed_threshold": 3,
+      "window_minutes": 10
+    },
+    {
+      "id": "NET-AUTH-002",
+      "title": "Successful login after repeated failures",
+      "severity": "HIGH",
+      "failed_threshold": 3,
+      "window_minutes": 10
+    },
+    {
+      "id": "NET-SCAN-001",
+      "title": "Possible port scan",
+      "severity": "MEDIUM",
+      "unique_port_threshold": 4,
+      "window_minutes": 5
+    },
+    {
+      "id": "NET-LAT-001",
+      "title": "Unexpected lateral administrative connection",
+      "severity": "HIGH",
+      "ports": [
+        22,
+        3389,
+        5985,
+        5986
+      ]
+    } ,
+    {
+      "id": "NET-LAT-001",
+      "title": "Unexpected lateral administrative connection",
+      "severity": "HIGH",
+      "ports": [
+        22,
+        3389,
+        5985,
+        5986
+      ]
+    },
+    {
+      "id": "NET-USER-001",
+      "title": "Multiple usernames attempted from one source",
+      "severity": "HIGH",
+      "username_threshold": 3
+    },
+    {
+      "id": "NET-OUT-001",
+      "title": "Unusual outbound connection",
+      "severity": "HIGH",
+      "allowed_common_ports": [
+        53,
+        80,
+        123,
+        443
+      ]
+    }
+  ]
+}
