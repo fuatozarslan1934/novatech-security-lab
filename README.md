@@ -1,241 +1,100 @@
 # NovaTech Security Lab
 
-## Overview
+Python-based cloud and security engineering lab that analyzes simulated Azure, Entra ID, Cisco, firewall, and Linux telemetry to identify security risks, correlate suspicious activity, investigate incidents, and generate reports.
 
-You have joined **NovaTech** as a Junior Cloud Security Engineer.
-
-NovaTech operates a hybrid environment containing:
-
-- Azure cloud resources
-- Microsoft Entra ID identities
-- Cisco network equipment
-- Linux servers
-- Firewalls
-- VPN infrastructure
-- Web applications
-- Databases
-- Storage systems
-
-You do **not** have access to the live environment.
-
-Instead, Security Engineering has provided exported configuration files, cloud inventories, identity records, network logs, authentication logs, firewall logs, and incident data.
-
-Your job is to build a **Python-based security analysis workstation** that:
-
-1. Parses the provided datasets.
-2. Inventories cloud and identity resources.
-3. Detects insecure configurations.
-4. Finds suspicious activity.
-5. Correlates related events across different data sources.
-6. Generates findings and incident reports.
-7. Optionally integrates Claude and/or OpenAI for evidence-grounded investigation assistance.
-8. Sanitizes sensitive information before sending telemetry to external AI APIs.
+The project demonstrates practical security engineering skills including detection logic, log parsing, cloud security configuration analysis, IAM/RBAC analysis, network security analysis, correlation, incident investigation, rule-based detection, secure AI integration, and automated reporting.
 
 ---
 
-# Rules of Engagement
+## Key Features
 
-This is a defensive cybersecurity training lab.
-
-All IP addresses, usernames, systems, and organizations in this repository are fictional or use documentation-only address ranges.
-
-Do not use these scripts against systems that you do not own or have permission to assess.
-
----
-
-# Project Objectives
-
-By the end of this project you should be able to demonstrate:
-
-- Python scripting
-- JSON parsing
-- Log parsing
-- Security detection logic
-- Azure security concepts
-- Identity and RBAC analysis
-- Network security analysis
-- Cisco log analysis
-- Incident investigation
-- Event correlation
-- Risk scoring
-- CLI development
-- Report generation
-- AI API integration
-- Secret and telemetry sanitization
-- Git and GitHub workflow
+- Azure cloud security configuration scanning
+- Entra ID identity and RBAC analysis
+- Cisco network authentication analysis
+- Firewall traffic and port-scan detection
+- Linux authentication and privilege escalation analysis
+- Cross-source security event correlation
+- Indicator hunting across network logs
+- JSON-driven detection rules
+- Incident investigation timelines
+- Sensitive-data sanitization before external AI use
+- Optional evidence-grounded AI investigation assistance
+- Markdown incident reports
+- Automated JSON, CSV, and HTML security reports
+- Command-line security analysis interface
 
 ---
 
-# Environment Setup
+## Architecture
 
-## Required tools
+```mermaid
+flowchart TD
 
-Install:
+    A[Azure Resources] --> G[Security Analysis Engine]
+    B[Entra ID Logs] --> G
+    C[Cisco Logs] --> G
+    D[Firewall Logs] --> G
+    E[Linux Auth Logs] --> G
+    F[Azure Activity Logs] --> G
 
-- Python 3.11+
-- Git
-- VS Code
-- jq
-- curl
-- Wireshark
-- GitHub CLI (optional)
+    G --> H[Detection Rules]
+    H --> I[Security Findings]
 
-Check Python:
+    I --> J[Correlation Engine]
+    J --> K[Incident Investigation]
 
-```bash
-python --version
-```
+    K --> L[Markdown Incident Report]
+    I --> M[JSON Report]
+    I --> N[CSV Report]
+    I --> O[HTML Report]
 
-Check Git:
-
-```bash
-git --version
-```
-
-Clone or unzip the project and enter the directory:
-
-```bash
-cd novatech-security-lab
-```
-
-Create a Python virtual environment:
-
-```bash
-python -m venv .venv
-```
-
-Activate on macOS/Linux:
-
-```bash
-source .venv/bin/activate
-```
-
-Activate on Windows PowerShell:
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-Install packages:
-
-```bash
-pip install -r requirements.txt
+    K --> P[Sanitization Layer]
+    P --> Q[Optional AI Assistant]
 ```
 
 ---
 
-# Optional AI Integration
+## Security Data Sources
 
-The project is designed so that detection logic is performed by Python.
+The lab uses simulated security telemetry representing a hybrid enterprise environment.
 
-AI may be used to:
+### Cloud
 
-- explain findings
-- summarize evidence
-- suggest investigation steps
-- help generate reports
-- assist with code development
-- explain MITRE ATT&CK mappings
+- Azure virtual machines
+- Storage accounts
+- SQL databases
+- Key Vault
+- Virtual networks
+- Network Security Groups
+- Azure Activity Logs
 
-AI should **not** replace deterministic detection logic.
+### Identity
 
-Copy:
+- Entra ID users
+- RBAC role assignments
+- Entra ID sign-in events
 
-```text
-.env.example
-```
+### Network
 
-to:
+- Cisco switch authentication logs
+- Cisco administrative activity
 
-```text
-.env
-```
+### Firewall
 
-Then add your API keys locally.
+- Cisco ASA firewall traffic logs
 
-Never commit `.env`.
+### Endpoint
+
+- Linux SSH authentication logs
+- Linux sudo activity
+
+---
+
+## Environment Inventory
+
+The inventory engine dynamically analyzes the supplied environment data.
 
 Example:
-
-```text
-OPENAI_API_KEY=your-key-here
-ANTHROPIC_API_KEY=your-key-here
-```
-
----
-
-# Repository Structure
-
-```text
-novatech-security-lab/
-
-├── README.md
-├── requirements.txt
-├── .env.example
-├── .gitignore
-│
-├── data/
-│   ├── cloud/
-│   │   ├── azure_resources.json
-│   │   ├── network_security_groups.json
-│   │   └── azure_activity.json
-│   ├── identity/
-│   │   ├── entra_users.json
-│   │   ├── entra_roles.json
-│   │   └── entra_signins.json
-│   ├── network/
-│   │   └── cisco-core.log
-│   ├── firewall/
-│   │   └── cisco_firewall.log
-│   ├── endpoint/
-│   │   └── linux_auth.log
-│   └── incidents/
-│       └── incident_queue.json
-│
-├── src/
-│   ├── security.py
-│   ├── inventory.py
-│   ├── cloud_analyzer.py
-│   ├── iam_analyzer.py
-│   ├── network_analyzer.py
-│   ├── firewall_analyzer.py
-│   ├── correlator.py
-│   ├── risk_engine.py
-│   ├── sanitize.py
-│   ├── ai_assistant.py
-│   └── report_generator.py
-│
-├── rules/
-│   ├── cloud_rules.json
-│   ├── identity_rules.json
-│   └── network_rules.json
-│
-├── reports/
-├── investigations/
-├── tests/
-└── instructor/
-    └── ANSWER_KEY.md
-```
-
----
-
-# Assignment 1 — Inventory the Environment
-
-Build:
-
-```text
-src/inventory.py
-```
-
-Your script must read the JSON files and produce an inventory.
-
-Target command:
-
-```bash
-python src/security.py inventory
-```
-
-Target output:
 
 ```text
 NOVATECH ENVIRONMENT
@@ -244,457 +103,515 @@ Virtual Machines       2
 Storage Accounts       2
 SQL Databases          1
 Key Vaults             1
-VNets                   1
-NSGs                    2
-Users                   8
-Privileged Users        3
-Network Devices         2
-```
-
-Do not hardcode totals.
-
-Read the data and calculate them.
-
----
-
-# Assignment 2 — Cloud Security Scanner
-
-Build:
-
-```text
-src/cloud_analyzer.py
-```
-
-Your scanner should evaluate:
-
-## Virtual machines
-
-Check for:
-
-- public IP addresses
-- missing managed identity
-- password-based authentication
-- missing disk encryption indication
-
-## Storage
-
-Check for:
-
-- public blob access
-- public network access
-- old TLS version
-- weak network restrictions
-
-## SQL
-
-Check for:
-
-- public network access
-- auditing disabled
-- excessive firewall ranges
-
-## Key Vault
-
-Check for:
-
-- public network access
-- secrets without expiration
-- secrets expiring within 30 days
-
-## NSGs
-
-Check for:
-
-- SSH exposed to the Internet
-- RDP exposed to the Internet
-- overly broad administrative access
-
-Target command:
-
-```bash
-python src/security.py scan
+VNets                  1
+NSGs                   2
+Users                  8
+Privileged Users       3
+Network Devices        2
 ```
 
 ---
 
-# Assignment 3 — Identity and RBAC Analysis
+## Cloud Security Detection
 
-Build:
+The cloud analyzer identifies insecure Azure configurations such as:
 
-```text
-src/iam_analyzer.py
-```
-
-Analyze:
-
-```text
-data/identity/entra_users.json
-data/identity/entra_roles.json
-data/identity/entra_signins.json
-```
-
-Detect:
-
-- Owner assignments
-- Contributor assignments
-- stale privileged accounts
-- suspicious failed logins
-- successful login after repeated failures
-- privileged access from unusual sources
-
-Target output should include:
-
-```text
-Finding ID
-Severity
-Identity
-Reason
-Evidence
-Recommendation
-```
-
----
-
-# Assignment 4 — Cisco Log Analysis
-
-Build:
-
-```text
-src/network_analyzer.py
-```
-
-Analyze:
-
-```text
-data/network/cisco-core.log
-```
-
-Detect:
-
-- repeated failed administrative login attempts
-- successful authentication after failures
-- configuration changes after suspicious authentication
-- repeated activity from the same source IP
-
-Target command:
-
-```bash
-python src/security.py hunt 198.51.100.77
-```
-
----
-
-# Assignment 5 — Firewall Analysis
-
-Build:
-
-```text
-src/firewall_analyzer.py
-```
-
-Analyze:
-
-```text
-data/firewall/cisco_firewall.log
-```
-
-Look for:
-
-- repeated denied connections
-- port scanning behavior
-- successful connections after scanning
-- lateral movement
-- unusual outbound connections
-- suspicious VPN activity
-
----
-
-# Assignment 6 — Linux Authentication Analysis
-
-Analyze:
-
-```text
-data/endpoint/linux_auth.log
-```
-
-Identify:
-
-- brute-force attempts
-- username enumeration
-- successful SSH login following repeated failures
-- privileged login patterns
-
-Do not simply count the word `Failed`.
-
-Build behavioral logic.
-
----
-
-# Assignment 7 — Correlation Engine
-
-Build:
-
-```text
-src/correlator.py
-```
-
-Correlate events using:
-
-- source IP
-- username
-- timestamp
-- target system
-- action
-- resource
-
-The engine should be able to identify one incident that spans multiple systems.
+- Publicly exposed virtual machines
+- Password-based SSH authentication
+- Missing managed identities
+- Public storage access
+- Weak TLS configuration
+- Public SQL access
+- Disabled SQL auditing
+- Overly broad SQL firewall rules
+- Public Key Vault access
+- Secrets without expiration dates
+- Internet-exposed SSH and RDP
+- Overly permissive NSG rules
 
 Example:
+
+```text
+[Critical] CLOUD-NSG-001
+
+Resource: nsg-web
+Reason: SSH is exposed to the Internet.
+Evidence: source=0.0.0.0/0, port=22
+```
+
+---
+
+## Identity and RBAC Analysis
+
+The identity analyzer evaluates Entra ID users, role assignments, and authentication activity.
+
+Detections include:
+
+- Subscription Owner assignments
+- Contributor privileges
+- Stale privileged accounts
+- Repeated authentication failures
+- Successful login after repeated failures
+- Privileged authentication from unusual external sources
+
+Example:
+
+```text
+[Critical] IAM-AUTH-002
+
+Identity: netadmin@novatech.example
+Reason: Successful sign-in occurred after repeated failures.
+Evidence:
+source_ip=198.51.100.77
+previous_failures=3
+threshold=3
+```
+
+---
+
+## Cisco Security Analysis
+
+Cisco logs are parsed into structured events and analyzed for suspicious administrative activity.
+
+Detections include:
+
+- Repeated administrator login failures
+- Successful login after repeated failures
+- Configuration changes after suspicious authentication
+- Repeated activity from the same source IP
+
+Example:
+
+```text
+[Critical] NET-CONFIG-001
+
+Device: CORE-SW01
+Reason: Configuration change occurred shortly after suspicious authentication.
+Source IP: 198.51.100.77
+```
+
+---
+
+## Firewall Analysis
+
+Firewall telemetry is analyzed for network attack behavior including:
+
+- Repeated denied connections
+- Port scanning
+- Successful access following scanning
+- Internal lateral movement
+- Unusual outbound connections
+- Suspicious VPN activity
+
+---
+
+## Linux Authentication Analysis
+
+Linux authentication logs are analyzed using behavioral detection logic rather than simple keyword counting.
+
+Detections include:
+
+- SSH brute-force activity
+- Username enumeration
+- Successful SSH access following repeated failures
+- Privileged login activity
+- Suspicious sudo execution
+
+Example suspicious sequence:
+
+```text
+Failed root login
+Failed admin login
+Failed devops login
+Successful devops SSH login
+sudo cat /etc/shadow
+```
+
+---
+
+## Cross-Source Correlation
+
+The correlation engine links events using:
+
+- Source IP
+- Identity
+- Timestamp
+- System
+- Resource
+- Action
+
+One investigation identified activity from:
 
 ```text
 198.51.100.77
-    ↓
-Cisco failed logins
-    ↓
-Cisco successful admin login
-    ↓
-Cisco configuration modification
-    ↓
-Linux successful SSH login
-    ↓
-Azure network security rule modification
-    ↓
-Outbound firewall traffic
 ```
 
-The output should explain why those events may represent one incident.
+across:
+
+- Firewall
+- Entra ID
+- Cisco
+- Azure Activity
+- Linux
+
+The resulting incident contained:
+
+```text
+23 correlated events
+5 telemetry sources
+5 affected systems
+Multiple identities
+```
+
+The timeline demonstrated a sequence involving:
+
+1. Network probing
+2. Authentication failures
+3. Successful privileged authentication
+4. Cisco configuration changes
+5. Azure NSG modification
+6. Linux SSH access
+7. Privileged Linux activity
 
 ---
 
-# Assignment 8 — Rule Engine
+## Rule Engine
 
-Do not hardcode every security rule in Python.
+Security thresholds are stored in JSON rule files rather than being fully hardcoded in Python.
 
-Use:
-
-```text
-rules/cloud_rules.json
-rules/identity_rules.json
-rules/network_rules.json
-```
-
-Your Python application should load rule definitions dynamically.
-
-Add at least five new rules of your own.
-
----
-
-# Assignment 9 — Security CLI
-
-Build:
+Rule files:
 
 ```text
-src/security.py
+rules/
+├── cloud_rules.json
+├── identity_rules.json
+└── network_rules.json
 ```
 
-Target commands:
+The rule engine currently loads 18 security rules.
 
-```bash
-python src/security.py inventory
-python src/security.py scan
-python src/security.py hunt 198.51.100.77
-python src/security.py investigate INC-001
-python src/security.py report
-```
-
-Optional:
-
-```bash
-python src/security.py investigate INC-001 --ai
-```
-
----
-
-# Assignment 10 — AI Assistant
-
-Build:
-
-```text
-src/ai_assistant.py
-```
-
-Support OpenAI and/or Claude.
-
-The Python security tooling must create structured evidence first.
-
-Example:
+Example rule:
 
 ```json
 {
-  "source_ip": "198.51.100.77",
-  "failed_logins": 8,
-  "successful_logins": 2,
-  "systems": [
-    "CORE-SW01",
-    "web-prod-01"
-  ],
-  "configuration_changes": 1
+  "id": "ID-AUTH-001",
+  "title": "Repeated authentication failures",
+  "severity": "HIGH",
+  "failed_threshold": 3
 }
 ```
 
-Only then may AI be used to:
-
-- summarize
-- explain
-- map to MITRE ATT&CK
-- suggest containment
-- recommend next investigation steps
+Detection behavior can therefore be modified through rule configuration without rewriting the analyzer logic.
 
 ---
 
-# Assignment 11 — Sanitization
+## Security CLI
 
-Build:
+The project provides a unified command-line interface.
 
-```text
-src/sanitize.py
+Show available commands:
+
+```bash
+python3 src/security.py -h
 ```
 
-Before sending data to an external AI service, redact:
+Available commands:
 
-- passwords
-- API keys
-- tokens
-- private keys
-- connection strings
-- secrets
+```text
+inventory
+scan
+identity
+network
+firewall
+linux
+hunt
+investigate
+report
+```
+
+### Inventory
+
+```bash
+python3 src/security.py inventory
+```
+
+### Cloud Security Scan
+
+```bash
+python3 src/security.py scan
+```
+
+### Identity Analysis
+
+```bash
+python3 src/security.py identity
+```
+
+### Cisco Analysis
+
+```bash
+python3 src/security.py network
+```
+
+### Firewall Analysis
+
+```bash
+python3 src/security.py firewall
+```
+
+### Linux Analysis
+
+```bash
+python3 src/security.py linux
+```
+
+### Indicator Hunt
+
+```bash
+python3 src/security.py hunt 198.51.100.77
+```
+
+### Incident Investigation
+
+```bash
+python3 src/security.py investigate INC-004
+```
+
+### Generate Incident Report
+
+```bash
+python3 src/security.py investigate INC-004 --report
+```
+
+### Optional AI Investigation
+
+```bash
+python3 src/security.py investigate INC-004 --ai
+```
+
+### Generate Security Reports
+
+```bash
+python3 src/security.py report
+```
+
+---
+
+## Automated Reporting
+
+The reporting engine aggregates findings from:
+
+- Cloud
+- Identity
+- Cisco
+- Firewall
+- Linux
+
+and generates:
+
+```text
+JSON
+CSV
+HTML
+```
 
 Example:
 
 ```text
-password=SuperSecret123
+NOVATECH SECURITY REPORT GENERATED
+
+Total findings: 36
+
+JSON: reports/novatech_security_report_<timestamp>.json
+CSV:  reports/novatech_security_report_<timestamp>.csv
+HTML: reports/novatech_security_report_<timestamp>.html
 ```
 
-must become:
+---
+
+## Incident Reports
+
+Incident investigations can also be exported as Markdown.
+
+Example:
+
+```text
+investigations/INC-004.md
+```
+
+The report includes:
+
+- Incident overview
+- Primary indicator
+- Telemetry sources
+- Systems
+- Identities
+- Correlated event timeline
+- Security assessment
+- Recommended investigation actions
+
+---
+
+## Secure AI Integration
+
+AI assistance is optional.
+
+The deterministic Python detection and correlation logic remains the primary source of security findings.
+
+Before investigation data can be sent to an external AI service, the project sanitizes sensitive values.
+
+Examples of redacted fields:
+
+```text
+password
+api_key
+token
+client_secret
+connection_string
+private_key
+```
+
+Example:
 
 ```text
 password=[REDACTED]
+api_key=[REDACTED]
+token=[REDACTED]
 ```
 
----
-
-# Assignment 12 — Incident Reports
-
-For each incident you investigate, create:
+If no API key is configured, the application continues normally without AI.
 
 ```text
-investigations/INC-XXX.md
+OPENAI_API_KEY is not configured.
+AI analysis was skipped.
+Deterministic investigation results remain available.
 ```
-
-Each report should include:
-
-1. Incident ID
-2. Severity
-3. Executive Summary
-4. Timeline
-5. Affected Systems
-6. Affected Identities
-7. Indicators
-8. Evidence
-9. Root Cause
-10. Attack Path
-11. Containment
-12. Remediation
-13. MITRE ATT&CK Mapping
 
 ---
 
-# Assignment 13 — Automated Reports
-
-Generate:
+## Project Structure
 
 ```text
-reports/security-report.json
-reports/security-report.csv
-reports/security-report.html
+novatech-security-lab/
+│
+├── data/
+│   ├── cloud/
+│   ├── endpoint/
+│   ├── firewall/
+│   ├── identity/
+│   ├── incidents/
+│   └── network/
+│
+├── investigations/
+│   └── INC-004.md
+│
+├── reports/
+│
+├── rules/
+│   ├── cloud_rules.json
+│   ├── identity_rules.json
+│   └── network_rules.json
+│
+├── src/
+│   ├── ai_assistant.py
+│   ├── cloud_analyzer.py
+│   ├── correlator.py
+│   ├── firewall_analyzer.py
+│   ├── iam_analyzer.py
+│   ├── incident_report.py
+│   ├── inventory.py
+│   ├── linux_analyzer.py
+│   ├── network_analyzer.py
+│   ├── report_generator.py
+│   ├── risk_engine.py
+│   ├── rule_engine.py
+│   ├── sanitize.py
+│   └── security.py
+│
+├── tests/
+│   └── test_sanitize.py
+│
+├── .gitignore
+├── requirements.txt
+└── README.md
 ```
 
-Include:
-
-- finding ID
-- severity
-- category
-- affected resource
-- evidence
-- recommendation
-
 ---
 
-# Investigation Queue
+## Installation
 
-Start with:
+Clone the repository:
 
-```text
-data/incidents/incident_queue.json
+```bash
+git clone https://github.com/fuatozarslan1934/novatech-security-lab.git
 ```
 
-Do not read the instructor answer key until all investigations are complete.
+Enter the project directory:
+
+```bash
+cd novatech-security-lab
+```
+
+Create a Python virtual environment:
+
+```bash
+python3 -m venv .venv
+```
+
+Activate it:
+
+```bash
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Test the CLI:
+
+```bash
+python3 src/security.py -h
+```
 
 ---
 
-# GitHub Requirements
+## Skills Demonstrated
 
-Your GitHub repository should contain:
+This project demonstrates practical experience with:
 
-- clean README
-- Python source code
-- rules
-- sample reports
-- incident reports
-- screenshots of terminal output
-- architecture diagram
-- lessons learned
-
-Never commit:
-
-- API keys
-- passwords
-- access tokens
-- `.env`
-- private keys
-- real customer data
-
----
-
-# Interview Preparation
-
-When finished, be able to answer:
-
-- How does your detection engine work?
-- Why did you separate rules from Python code?
-- How did you correlate logs across systems?
-- How did you detect brute-force behavior?
-- How did you distinguish normal HTTPS exposure from risky SSH exposure?
-- How did you analyze RBAC?
-- What did you learn from Cisco logs?
-- How did you use AI safely?
-- How did you sanitize data?
-- What would you change if this were a production security product?
+- Python security automation
+- Azure security concepts
+- Entra ID
+- RBAC and least privilege
+- Network security
+- Cisco log analysis
+- Firewall analysis
+- Linux authentication analysis
+- Detection engineering
+- Rule-based detection
+- Security event correlation
+- Threat hunting
+- Incident investigation
+- Security reporting
+- Sensitive-data sanitization
+- Secure AI integration
+- Git and GitHub
 
 ---
 
-# Success Criteria
+## Important Note
 
-The project is complete when:
+All infrastructure data, identities, IP addresses, incidents, and telemetry in this repository are simulated for cybersecurity training and portfolio purposes.
 
-- all datasets can be parsed
-- cloud configuration risks are identified
-- suspicious authentication patterns are detected
-- Cisco events are analyzed
-- firewall activity is analyzed
-- at least one multi-system incident is correlated
-- reports are generated
-- AI integration is optional but functional
-- sensitive data is sanitized before AI use
-- code is committed to GitHub
-- you can explain every major component without relying on AI
+The project does not contain production credentials or real customer security data.
+
+---
+
+## Author
+
+**Fuat Ozarslan**
+
+Cybersecurity | Cloud Security | Security Engineering | Python Automation
