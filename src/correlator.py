@@ -9,7 +9,6 @@ from datetime import datetime, timezone
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 
-SUSPICIOUS_IP = "198.51.100.77"
 
 
 def load_json(path):
@@ -396,8 +395,19 @@ def correlate_source_ip(source_ip):
     )
 
 
-def build_incident_summary(source_ip):
+
+def build_incident_summary(
+    source_ip,
+    focus_sources=None,
+):
     events = correlate_source_ip(source_ip)
+
+    if focus_sources:
+        events = [
+            event
+            for event in events
+            if event.get("source") in focus_sources
+        ]
 
     systems = sorted(
         {
@@ -443,10 +453,28 @@ def investigate_incident(incident_id):
         "correlation": None,
     }
 
-    if incident_id == "INC-004":
-        result["correlation"] = build_incident_summary(
-            SUSPICIOUS_IP
-        )
+    indicators = incident.get(
+        "indicators",
+        [],
+    )
+
+    focus_sources = incident.get(
+        "focus_sources",
+        [],
+    )
+
+    for indicator in indicators:
+        if indicator.get("type") == "ip":
+            source_ip = indicator.get("value")
+
+            result["correlation"] = (
+                build_incident_summary(
+                    source_ip,
+                    focus_sources,
+                )
+            )
+
+            break
 
     return result
 
@@ -475,11 +503,9 @@ def print_incident_investigation(incident_id):
 
     if not correlation:
         print(
-            "\nDetailed correlation is currently "
-            "implemented for INC-004."
-        )
-        return
-
+    "\nNo correlatable indicator was found "
+    "for this incident."
+)
     print(
         f"\nPrimary Indicator: "
         f"{correlation['source_ip']}"
@@ -533,18 +559,27 @@ def print_incident_investigation(incident_id):
             f"  Source IP: {event['source_ip']}"
         )
         print("-" * 60)
+    
+
 
     print(
         "\nCORRELATION ASSESSMENT\n"
     )
 
-    print(
-        "The same source IP appears across Entra ID, "
-        "Cisco, Azure, Linux, and firewall telemetry. "
-        "The sequence includes repeated authentication "
-        "failures, successful privileged access, "
-        "configuration changes, cloud activity, SSH "
-        "access, and privileged Linux activity. These "
-        "events may represent one multi-system security "
-        "incident rather than unrelated alerts."
+    source_list = ", ".join(
+        correlation["sources"]
     )
+    if len(correlation["sources"]) == 1:
+        print(
+            f"The indicator {correlation['source_ip']} "
+            f"was observed in {source_list} telemetry "
+            f"across {correlation['event_count']} correlated events. "
+            "The activity should be reviewed as a related incident sequence."
+        )
+    else:
+        print(
+            f"The indicator {correlation['source_ip']} "
+            f"was observed across {source_list} telemetry "
+            f"with {correlation['event_count']} correlated events. "
+            "The combined activity may represent a multi-system security incident."
+        )

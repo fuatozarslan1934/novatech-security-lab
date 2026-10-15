@@ -85,3 +85,4 @@ def print_rules():
     print(
         f"\nTotal Rules: {len(rules)}"
     )
+    

@@ -4,25 +4,60 @@
       "id": "INC-001",
       "title": "Possible SSH brute-force and compromise",
       "difficulty": "Easy",
-      "status": "Open"
+      "status": "Open",
+      "indicators": [
+        {
+          "type": "ip",
+          "value": "198.51.100.77"
+        }
+      ],
+      "focus_sources": [
+        "Linux"
+      ]
     },
     {
       "id": "INC-002",
       "title": "Suspicious Cisco administrator activity",
       "difficulty": "Medium",
-      "status": "Open"
+      "status": "Open",
+      "indicators": [
+        {
+          "type": "ip",
+          "value": "198.51.100.77"
+        }
+      ],
+      "focus_sources": [
+        "Cisco"
+      ]
     },
     {
       "id": "INC-003",
       "title": "Unexpected cloud privilege and configuration activity",
       "difficulty": "Medium",
-      "status": "Open"
+      "status": "Open",
+      "indicators": [
+        {
+          "type": "ip",
+          "value": "198.51.100.77"
+        }
+      ],
+      "focus_sources": [
+        "Entra ID",
+        "Azure Activity"
+      ]
     },
     {
       "id": "INC-004",
       "title": "Potential multi-system compromise",
       "difficulty": "Hard",
-      "status": "Open"
+      "status": "Open",
+      "indicators": [
+        {
+          "type": "ip",
+          "value": "198.51.100.77"
+        }
+      ],
+      "focus_sources": []
     }
   ]
 }

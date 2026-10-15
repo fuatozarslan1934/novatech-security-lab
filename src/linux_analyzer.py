@@ -366,3 +366,4 @@ def print_linux_findings():
             f"{finding['recommendation']}"
         )
         print("-" * 60)
+        

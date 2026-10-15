@@ -22,10 +22,9 @@ from correlator import (
     print_incident_investigation,
 )
 
-from network_analyzer import (
-    print_hunt_results,
-    print_network_findings,
-)
+from hunter import print_hunt_results
+from network_analyzer import print_network_findings
+from risk_engine import score_investigation
 
 
 def main():
@@ -95,17 +94,49 @@ def main():
         print_hunt_results(
             args.indicator
         )
-
     elif args.command == "investigate":
         print_incident_investigation(
             args.incident_id
         )
 
+        investigation = investigate_incident(
+            args.incident_id
+        )
+
+        if investigation:
+            risk = score_investigation(
+                investigation
+            )
+
+            print("\nRISK ASSESSMENT\n")
+            print(
+                f"Risk Score: "
+                f"{risk['final_score']}/100"
+            )
+            print(
+                f"Risk Level: "
+                f"{risk['level']}"
+            )
+            print(
+                f"Base Score: "
+                f"{risk['base_score']}"
+            )
+            print(
+                f"Context Bonus: "
+                f"+{risk['bonus']}"
+            )
+
+            if risk["bonus_reasons"]:
+                print("Risk Factors:")
+
+                for reason in risk["bonus_reasons"]:
+                    print(
+                        f"  - {reason}"
+                    )
+
         if args.report:
-            report_path = (
-                generate_incident_report(
-                    args.incident_id
-                )
+            report_path = generate_incident_report(
+                args.incident_id
             )
 
             if report_path:
@@ -114,17 +145,12 @@ def main():
                 )
                 print(report_path)
 
-        if args.ai:
-            investigation = (
-                investigate_incident(
-                    args.incident_id
-                )
+        if args.ai and investigation:
+            print_ai_analysis(
+                investigation
             )
 
-            if investigation:
-                print_ai_analysis(
-                    investigation
-                )
+    
 
     elif args.command == "report":
         print_report_results()
